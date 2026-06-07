@@ -2,7 +2,6 @@ import logging
 
 import azure.functions as func
 
-# from main import run_scheduled_task
 from etl.bronze import run_scheduled_task as run_bronze_task
 
 app = func.FunctionApp()
@@ -22,18 +21,7 @@ def simple_writer(timer: func.TimerRequest) -> None:
     logging.info(result)
 
 
-# Function 2
-# @app.blob_trigger(
-#     arg_name="inputblob",
-#     path="bronze/crypto/{name}",
-#     connection="AzureWebJobsStorage"
-# )
-# def bronze_to_silver(inputblob):
-#     ...
-#     save_to_silver(...)
-
 
 if __name__ == "__main__":
     bronze_result = run_bronze_task()
     logging.info(bronze_result)
-    # print(bronze_result)
