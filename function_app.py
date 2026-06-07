@@ -2,7 +2,7 @@ import logging
 
 import azure.functions as func
 
-# from main import run_scheduled_task
+from main import run_scheduled_task
 
 app = func.FunctionApp()
 
@@ -17,5 +17,5 @@ def simple_writer(timer: func.TimerRequest) -> None:
     if timer.past_due:
         logging.warning("simple-writer timer trigger is past due.")
 
-    # result = run_scheduled_task()
-    logging.info("simple-writer timer trigger function ran at %s", timer.schedule_status.last)
+    result = run_scheduled_task()
+    logging.info(result)
