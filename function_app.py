@@ -16,8 +16,11 @@ app = func.FunctionApp()
 def simple_writer(timer: func.TimerRequest) -> None:
     if timer.past_due:
         logging.warning("simple-writer timer trigger is past due.")
-    res = settings.values["AzureStorageConnectionString"]
-    logging.info(f"Loaded secret from Key Vault: {res[:4]}...{res[-4:]}")
+
     logging.info("simple-writer timer trigger function ran")
+    
+    from settings import settings
+    res = settings.values["AzureStorageConnectionString"]
+    logging.info(res)
     # result = run_bronze_task()
     # logging.info(result)
