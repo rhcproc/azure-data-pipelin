@@ -2,7 +2,7 @@ import logging
 
 import azure.functions as func
 
-from etl.bronze import run_scheduled_task as run_bronze_task
+# from etl.bronze import run_scheduled_task as run_bronze_task
 
 app = func.FunctionApp()
 
@@ -17,5 +17,5 @@ def simple_writer(timer: func.TimerRequest) -> None:
     if timer.past_due:
         logging.warning("simple-writer timer trigger is past due.")
     logging.info("simple-writer timer trigger function ran")
-    result = run_bronze_task()
-    logging.info(result)
+    # result = run_bronze_task()
+    # logging.info(result)
