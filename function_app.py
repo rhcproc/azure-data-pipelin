@@ -19,9 +19,3 @@ def simple_writer(timer: func.TimerRequest) -> None:
     logging.info("simple-writer timer trigger function ran")
     result = run_bronze_task()
     logging.info(result)
-
-
-
-if __name__ == "__main__":
-    bronze_result = run_bronze_task()
-    logging.info(bronze_result)
