@@ -20,11 +20,12 @@ def simple_writer(timer: func.TimerRequest) -> None:
         if timer.past_due:
             logging.warning("[APP] Timer is past due")
 
-        from settings import settings
-
-        res = settings.values["AzureStorageConnectionString"]
-
-        logging.info(f"[APP] Loaded secret: {res[:4]}...{res[-4:]}")
+        # from settings import settings
+        # res = settings.values["AzureStorageConnectionString"]
+        # logging.info(f"[APP] Loaded secret: {res[:4]}...{res[-4:]}")
+        from etl.bronze import run_scheduled_task as run_bronze_task
+        result = run_bronze_task()
+        logging.info(f"[APP] Task result: {result}")
         logging.info("[APP] Function finished")
 
     except Exception:
