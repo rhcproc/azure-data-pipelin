@@ -22,7 +22,7 @@ def run_scheduled_task() -> str:
     # Example data
     data = {
         "symbol": "BTCUSDT",
-        "price": 105000,
+        "price": 105001,
         "timestamp": datetime.utcnow().isoformat()
     }
 
