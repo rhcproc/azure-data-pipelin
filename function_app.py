@@ -2,8 +2,7 @@ import logging
 
 import azure.functions as func
 
-from main import run_scheduled_task
-
+# from main import run_scheduled_task
 
 app = func.FunctionApp()
 
