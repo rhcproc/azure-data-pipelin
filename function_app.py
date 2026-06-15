@@ -37,7 +37,7 @@ def simple_writer(timer: func.TimerRequest) -> None:
 @app.blob_trigger(
     arg_name="blob",
     path="bronze/crypto/{name}",
-    connection="AzureStorageConnectionString",
+    connection="AzureWebJobsStorage",
 )
 def process_bronze(blob: func.InputStream) -> None:
     try:

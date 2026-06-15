@@ -47,7 +47,7 @@ def run_scheduled_task(
     source_name: str | None = None,
     raw_data: bytes | str | None = None,
 ) -> str:
-    connection_string = settings.values["AzureStorageConnectionString"]
+    connection_string = settings.values["AzureWebJobsStorage"]
     service_client = DataLakeServiceClient.from_connection_string(
         connection_string
     )
