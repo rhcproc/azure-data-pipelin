@@ -35,27 +35,14 @@ def simple_writer(timer: func.TimerRequest) -> None:
         raise
 
 
-@app.blob_trigger(
-    arg_name="blob",
-    path="bronze/crypto/{name}",
-    connection="AzureStorageConnectionString",
-    source="EventGrid",
-)
-def process_bronze(blob: func.InputStream) -> None:
-    # try:
-    #     logging.info(f"[APP] Processing bronze blob: {blob.name}")
+@app.event_grid_trigger(arg_name="event")
+def process_bronze(event: func.EventGridEvent):
+    logging.warning("🔥 EVENT GRID TRIGGER FIRED")
 
-    #     from etl.silver import run_scheduled_task as run_silver_task
+    data = event.get_json()
+    logging.warning(f"Event type: {event.event_type}")
+    logging.warning(f"Subject: {event.subject}")
+    logging.warning(f"Data: {data}")
 
-    #     result = run_silver_task(
-    #         source_name=blob.name,
-    #         raw_data=blob.read(),
-    #     )
-    #     logging.info(f"[APP] Silver task result: {result}")
-
-    # except Exception:
-    #     logging.exception("[APP] Silver task failed")
-    #     raise
-    logging.info("=== BLOB TRIGGER FIRED ===")
-    logging.info(f"Blob name: {blob.name}")
-    logging.info(f"Blob size: {blob.length}")
+    blob_url = data.get("url")
+    logging.warning(f"Blob URL: {blob_url}")
