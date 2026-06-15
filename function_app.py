@@ -41,17 +41,20 @@ def simple_writer(timer: func.TimerRequest) -> None:
     connection="AzureStorageConnectionString",
 )
 def process_bronze(blob: func.InputStream) -> None:
-    try:
-        logging.info(f"[APP] Processing bronze blob: {blob.name}")
+    # try:
+    #     logging.info(f"[APP] Processing bronze blob: {blob.name}")
 
-        from etl.silver import run_scheduled_task as run_silver_task
+    #     from etl.silver import run_scheduled_task as run_silver_task
 
-        result = run_silver_task(
-            source_name=blob.name,
-            raw_data=blob.read(),
-        )
-        logging.info(f"[APP] Silver task result: {result}")
+    #     result = run_silver_task(
+    #         source_name=blob.name,
+    #         raw_data=blob.read(),
+    #     )
+    #     logging.info(f"[APP] Silver task result: {result}")
 
-    except Exception:
-        logging.exception("[APP] Silver task failed")
-        raise
+    # except Exception:
+    #     logging.exception("[APP] Silver task failed")
+    #     raise
+    logging.info("=== BLOB TRIGGER FIRED ===")
+    logging.info(f"Blob name: {blob.name}")
+    logging.info(f"Blob size: {blob.length}")
