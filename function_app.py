@@ -8,7 +8,7 @@ app = func.FunctionApp()
 
 
 @app.timer_trigger(
-    schedule="0 0 * * * *",
+    schedule="0 */2 * * * *",
     arg_name="timer",
     run_on_startup=False,
     use_monitor=True,
@@ -33,7 +33,6 @@ def simple_writer(timer: func.TimerRequest) -> None:
     except Exception:
         logging.exception("[APP] Function failed")
         raise
-
 
 @app.blob_trigger(
     arg_name="blob",
