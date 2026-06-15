@@ -1,6 +1,6 @@
 import json
 from datetime import datetime
-from azure.storage.filedatalake import DataLakeServiceClient
+from azure.storage.blob import BlobServiceClient
 
 from settings import settings
 
@@ -10,14 +10,12 @@ def run_scheduled_task() -> str:
     CONNECTION_STRING = settings.values["AzureStorageConnectionString"]
 
     # Create clients
-    service_client = DataLakeServiceClient.from_connection_string(
+    service_client = BlobServiceClient.from_connection_string(
         CONNECTION_STRING
     )
 
     # bronze container
-    file_system_client = service_client.get_file_system_client(
-        file_system="bronze"
-    )
+    container_client = service_client.get_container_client("bronze")
 
     # Example data
     data = {
@@ -26,21 +24,21 @@ def run_scheduled_task() -> str:
         "timestamp": datetime.utcnow().isoformat()
     }
 
-    # Path in Data Lake
-    file_path = (
+    # Path in Blob Storage
+    blob_path = (
         f"crypto/{data['symbol']}.json"
     )
 
-    # Create file
-    file_client = file_system_client.get_file_client(file_path)
+    # Create blob client
+    blob_client = container_client.get_blob_client(blob_path)
 
     # Upload
-    file_client.upload_data(
+    blob_client.upload_blob(
         json.dumps(data),
         overwrite=True
     )
 
-    return f"simple-writer timer ran at {datetime.utcnow().isoformat()}; wrote data to {file_path}"
+    return f"simple-writer timer ran at {datetime.utcnow().isoformat()}; wrote data to {blob_path}"
 
 
 if __name__ == "__main__":
