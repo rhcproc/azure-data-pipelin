@@ -39,6 +39,7 @@ def simple_writer(timer: func.TimerRequest) -> None:
     arg_name="blob",
     path="bronze/crypto/{name}",
     connection="AzureStorageConnectionString",
+    source="EventGrid",
 )
 def process_bronze(blob: func.InputStream) -> None:
     # try:
