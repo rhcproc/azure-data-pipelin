@@ -7,7 +7,7 @@ from settings import settings
 
 def run_scheduled_task() -> str:
     # Azure Storage Connection String
-    CONNECTION_STRING = settings.values["AzureWebJobsStorage"]
+    CONNECTION_STRING = settings.values["AzureStorageConnectionString"]
 
     # Create clients
     service_client = DataLakeServiceClient.from_connection_string(
