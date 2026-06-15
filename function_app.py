@@ -34,6 +34,7 @@ def simple_writer(timer: func.TimerRequest) -> None:
         logging.exception("[APP] Function failed")
         raise
 
+
 @app.blob_trigger(
     arg_name="blob",
     path="bronze/crypto/{name}",
